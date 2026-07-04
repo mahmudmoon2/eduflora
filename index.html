@@ -1,0 +1,2768 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management Platform - Complete ERP Solution</title>
+    <link rel="icon" type="image/png" href="EduFlora.png">
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #dbeafe;
+            --primary-dark: #1e40af;
+            --accent: #7c3aed;
+            --accent-hover: #6d28d9;
+            --accent-light: #ede9fe;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.1), 0 4px 10px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 40px -5px rgba(0,0,0,0.15);
+            --gradient-1: linear-gradient(135deg, #2563eb, #7c3aed);
+            --gradient-2: linear-gradient(135deg, #059669, #2563eb);
+            --gradient-3: linear-gradient(135deg, #dc2626, #ea580c);
+            --gradient-4: linear-gradient(135deg, #f59e0b, #ef4444);
+            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass-bg: rgba(255,255,255,0.8);
+            --glass-border: rgba(255,255,255,0.2);
+
+            /* EN Theme Colors - Blue/Purple (hero-style) */
+            --en-particle: rgba(37,99,235,0.3);
+            --en-particle-2: rgba(124,58,237,0.25);
+            --en-particle-3: rgba(16,185,129,0.2);
+            --en-particle-4: rgba(239,68,68,0.2);
+            --en-grid: rgba(37,99,235,0.12);
+            --en-glow-1: rgba(37,99,235,0.12);
+            --en-glow-2: rgba(124,58,237,0.1);
+
+            /* BN Theme Colors - Green/Teal/Gold (hero-style) */
+            --bn-particle: rgba(16,185,129,0.3);
+            --bn-particle-2: rgba(245,158,11,0.25);
+            --bn-particle-3: rgba(37,99,235,0.2);
+            --bn-particle-4: rgba(239,68,68,0.2);
+            --bn-grid: rgba(16,185,129,0.12);
+            --bn-glow-1: rgba(16,185,129,0.12);
+            --bn-glow-2: rgba(245,158,11,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0b1120;
+            --bg-secondary: #131c31;
+            --bg-card: #1a2338;
+            --bg-card-hover: #243050;
+            --text-primary: #f0f4f8;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --primary: #3b82f6;
+            --primary-hover: #60a5fa;
+            --primary-light: #1e3a5f;
+            --accent: #a78bfa;
+            --accent-hover: #c4b5fd;
+            --accent-light: #2e1065;
+            --border: #1e3a5f;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+            --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.4), 0 4px 10px -2px rgba(0,0,0,0.3);
+            --shadow-xl: 0 20px 40px -5px rgba(0,0,0,0.5);
+            --glass-bg: rgba(15,23,42,0.8);
+            --glass-border: rgba(255,255,255,0.05);
+            --gradient-hero: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+            
+            --en-particle: rgba(37,99,235,0.25);
+            --en-particle-2: rgba(124,58,237,0.2);
+            --en-particle-3: rgba(16,185,129,0.15);
+            --en-particle-4: rgba(239,68,68,0.15);
+            --en-grid: rgba(37,99,235,0.08);
+            --en-glow-1: rgba(37,99,235,0.1);
+            --en-glow-2: rgba(124,58,237,0.08);
+            
+            --bn-particle: rgba(16,185,129,0.25);
+            --bn-particle-2: rgba(245,158,11,0.2);
+            --bn-particle-3: rgba(37,99,235,0.15);
+            --bn-particle-4: rgba(239,68,68,0.15);
+            --bn-grid: rgba(16,185,129,0.08);
+            --bn-glow-1: rgba(16,185,129,0.1);
+            --bn-glow-2: rgba(245,158,11,0.08);
+        }
+
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* ===== Scrollbar ===== */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+        /* ===== Navigation ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2.5rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all var(--transition);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .nav-logo img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+        }
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .nav-logo-text .brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+        .nav-logo-text .brand span { color: var(--primary); }
+        .nav-logo-text .sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--radius-xs);
+            transition: all var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: all var(--transition);
+            transform: translateX(-50%);
+            border-radius: 1px;
+        }
+        .nav-links a:hover::after { width: 60%; }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 14px;
+            border-radius: var(--radius-xs);
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            transition: all var(--transition);
+            font-family: inherit;
+        }
+        .nav-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--text-primary);
+        }
+        .hamburger svg { width: 24px; height: 24px; }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 2rem 80px;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-hero);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 950px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+            letter-spacing: 0.3px;
+        }
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6.5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+            letter-spacing: -1px;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            color: rgba(255,255,255,0.7);
+            max-width: 700px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-1);
+            color: white;
+            padding: 16px 34px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 4px 20px rgba(37,99,235,0.35);
+            font-family: inherit;
+        }
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37,99,235,0.45);
+        }
+        .hero-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            padding: 16px 34px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+            text-decoration: none;
+        }
+        .hero-cta-secondary:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+
+        .hero-roles {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero-role {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            transition: all var(--transition);
+        }
+        .hero-role:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .hero-role .role-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .role-admin .role-dot { background: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+        .role-teacher .role-dot { background: #3b82f6; box-shadow: 0 0 8px rgba(59,130,246,0.5); }
+        .role-student .role-dot { background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,0.5); }
+        .role-parent .role-dot { background: #f59e0b; box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce-down 2s ease-in-out infinite;
+        }
+        .hero-scroll-indicator svg { width: 20px; height: 20px; }
+        @keyframes bounce-down {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ===== HERO-STYLE ANIMATED BACKGROUND (shared by all sections) ===== */
+        /* Floating particles */
+        .bg-particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: bgFloat linear infinite;
+        }
+        /* EN particles */
+        html[data-lang="en"] .bg-particle { background: var(--en-particle); }
+        html[data-lang="en"] .bg-particle:nth-child(5) { background: var(--en-particle-2); }
+        html[data-lang="en"] .bg-particle:nth-child(6) { background: var(--en-particle-3); }
+        html[data-lang="en"] .bg-particle:nth-child(7) { background: var(--en-particle-4); }
+        /* BN particles */
+        html[data-lang="bn"] .bg-particle { background: var(--bn-particle); }
+        html[data-lang="bn"] .bg-particle:nth-child(5) { background: var(--bn-particle-2); }
+        html[data-lang="bn"] .bg-particle:nth-child(6) { background: var(--bn-particle-3); }
+        html[data-lang="bn"] .bg-particle:nth-child(7) { background: var(--bn-particle-4); }
+
+        .bg-particle:nth-child(1) { left: 10%; top: 20%; animation-duration: 8s; animation-delay: 0s; }
+        .bg-particle:nth-child(2) { left: 25%; top: 60%; animation-duration: 10s; animation-delay: 1s; width: 6px; height: 6px; }
+        .bg-particle:nth-child(3) { left: 45%; top: 30%; animation-duration: 7s; animation-delay: 2s; }
+        .bg-particle:nth-child(4) { left: 65%; top: 70%; animation-duration: 12s; animation-delay: 0.5s; width: 5px; height: 5px; }
+        .bg-particle:nth-child(5) { left: 80%; top: 40%; animation-duration: 9s; animation-delay: 3s; }
+        .bg-particle:nth-child(6) { left: 50%; top: 10%; animation-duration: 11s; animation-delay: 1.5s; width: 3px; height: 3px; }
+        .bg-particle:nth-child(7) { left: 90%; top: 80%; animation-duration: 8s; animation-delay: 2.5s; width: 5px; height: 5px; }
+        .bg-particle:nth-child(8) { left: 35%; top: 85%; animation-duration: 13s; animation-delay: 0.8s; }
+
+        @keyframes bgFloat {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+        }
+
+        /* Grid background */
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+        html[data-lang="en"] .bg-grid {
+            background-image: 
+                linear-gradient(var(--en-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--en-grid) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        html[data-lang="bn"] .bg-grid {
+            background-image: 
+                linear-gradient(var(--bn-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--bn-grid) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Glowing orbs */
+        .bg-glows {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            animation: bgGlowPulse 6s ease-in-out infinite alternate;
+        }
+        /* EN glows */
+        html[data-lang="en"] .bg-glow:nth-child(1) {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--en-glow-1), transparent 70%);
+            top: -10%; right: -10%;
+            animation-duration: 6s;
+        }
+        html[data-lang="en"] .bg-glow:nth-child(2) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--en-glow-2), transparent 70%);
+            bottom: -10%; left: -10%;
+            animation-duration: 8s;
+            animation-delay: 2s;
+        }
+        /* BN glows */
+        html[data-lang="bn"] .bg-glow:nth-child(1) {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--bn-glow-1), transparent 70%);
+            top: -10%; right: -10%;
+            animation-duration: 6s;
+        }
+        html[data-lang="bn"] .bg-glow:nth-child(2) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--bn-glow-2), transparent 70%);
+            bottom: -10%; left: -10%;
+            animation-duration: 8s;
+            animation-delay: 2s;
+        }
+
+        @keyframes bgGlowPulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+            100% { transform: scale(1.2) translate(30px, -30px); opacity: 1; }
+        }
+
+        /* Section wrapper for animated backgrounds */
+        .section-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .section-bg > .section-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Section Common ===== */
+        .section {
+            padding: 90px 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+        .section-header h2 .highlight {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        .section-divider {
+            width: 70px;
+            height: 5px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+            margin: 18px auto 0;
+        }
+
+        /* ===== Stats Section ===== */
+        .stats-section {
+            background: var(--bg-secondary);
+            transition: background var(--transition);
+            padding: 80px 0;
+            margin: 0;
+            max-width: 100%;
+        }
+        .stats-section .section {
+            padding: 0 2rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 20px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 22px;
+            text-align: center;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+        .stat-card:hover::before { opacity: 1; }
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* ===== Features Section ===== */
+        .features-section {
+            padding: 90px 0;
+            margin: 0;
+            max-width: 100%;
+        }
+        .features-section .section {
+            padding: 0 2rem;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 26px;
+            transition: all var(--transition);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card .card-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        .feature-card:hover .card-shine { opacity: 1; }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover::before { transform: scaleX(1); }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+        .feature-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .feature-tag {
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .feature-card h3 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+        .feature-details {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+        .feature-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .feature-detail-item:last-child { margin-bottom: 0; }
+        .feature-detail-item .check { color: var(--success); font-weight: 700; }
+
+        /* ===== Screenshots Section ===== */
+        .screenshots-section {
+            background: var(--bg-secondary);
+            transition: background var(--transition);
+            padding: 90px 0;
+            margin: 0;
+            max-width: 100%;
+        }
+        .screenshots-section .section {
+            padding: 0 2rem;
+        }
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .screenshot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+        .screenshot-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+        .screenshot-placeholder {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            opacity: 0.9;
+        }
+        .screenshot-placeholder .placeholder-icon {
+            font-size: 3.5rem;
+            opacity: 0.4;
+        }
+        .screenshot-placeholder .placeholder-label {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .screenshot-info {
+            padding: 18px 20px;
+        }
+        .screenshot-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .screenshot-info p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* Screenshot placeholder gradients for variety */
+        .ss-0 .screenshot-placeholder { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+        .ss-1 .screenshot-placeholder { background: linear-gradient(135deg, #059669, #2563eb); }
+        .ss-2 .screenshot-placeholder { background: linear-gradient(135deg, #dc2626, #ea580c); }
+        .ss-3 .screenshot-placeholder { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+        .ss-4 .screenshot-placeholder { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+        .ss-5 .screenshot-placeholder { background: linear-gradient(135deg, #14b8a6, #3b82f6); }
+
+        /* ===== PDF Section ===== */
+        .section-pdf {
+            padding: 90px 0;
+            margin: 0;
+            max-width: 100%;
+        }
+        .section-pdf .section {
+            padding: 0 2rem;
+        }
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+            gap: 16px;
+        }
+        .pdf-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 22px 16px;
+            text-align: center;
+            transition: all var(--transition);
+            position: relative;
+        }
+        .pdf-card::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: var(--radius-sm);
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity var(--transition);
+            z-index: -1;
+        }
+        .pdf-card:hover::after { opacity: 0.2; }
+        .pdf-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+        .pdf-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .pdf-card h4 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .pdf-card .pdf-module {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* ===== Tech Stack ===== */
+        .tech-section {
+            background: var(--bg-secondary);
+            transition: background var(--transition);
+            padding: 90px 0;
+            margin: 0;
+            max-width: 100%;
+        }
+        .tech-section .section {
+            padding: 0 2rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 26px;
+            transition: all var(--transition);
+        }
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tech-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tech-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            transition: all var(--transition);
+        }
+        .tech-badge:hover {
+            transform: scale(1.06);
+            box-shadow: 0 2px 8px rgba(37,99,235,0.2);
+        }
+        [data-theme="dark"] .tech-badge {
+            background: #1e3a5f;
+            color: #93c5fd;
+        }
+
+        /* ===== Contact / CTA Section ===== */
+        .cta-section {
+            padding: 90px 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .cta-card {
+            background: var(--gradient-1);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1), transparent 60%);
+        }
+        .cta-card h2 {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 14px;
+            position: relative;
+        }
+        .cta-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 28px;
+            position: relative;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--primary);
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+            position: relative;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ===== Contact Section ===== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .contact-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+            transition: all var(--transition);
+        }
+        .contact-form:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .contact-form h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .contact-form p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all var(--transition);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .form-submit-btn {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: var(--radius-xs);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+            width: 100%;
+        }
+        .form-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .contact-info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: all var(--transition);
+        }
+        .contact-info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .contact-info-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: var(--radius-xs);
+            text-decoration: none;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            margin-bottom: 10px;
+            transition: all var(--transition);
+            font-weight: 500;
+        }
+        .contact-link:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+        .contact-link .link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .contact-link .link-label {
+            font-size: 0.88rem;
+        }
+        .contact-link .link-value {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .contact-link:hover .link-value {
+            color: var(--primary);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 60px 2rem 30px;
+            transition: background var(--transition);
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .footer-brand h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .footer-brand h3 span { color: var(--primary); }
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+        .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all var(--transition);
+        }
+        .footer-social a:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: all var(--transition);
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+        .footer-bottom-links {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-bottom-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            transition: color var(--transition);
+        }
+        .footer-bottom-links a:hover { color: var(--primary); }
+
+        /* ===== Scroll Animation ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+        .reveal-delay-5 { transition-delay: 0.40s; }
+
+        /* ===== Mobile Nav ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            z-index: 999;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all var(--transition);
+            pointer-events: none;
+        }
+        .mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+            transition: color var(--transition);
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--primary); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .mobile-menu { display: block; }
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 0 1.2rem; }
+            .nav-logo-text .sub { display: none; }
+            .hero { padding: 100px 1rem 60px; }
+            .hero h1 { font-size: 2rem; }
+            .section { padding: 60px 1rem; }
+            .screenshot-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .pdf-grid { grid-template-columns: repeat(2, 1fr); }
+            .tech-grid { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .cta-card { padding: 40px 20px; }
+            .hero-role { font-size: 0.8rem; padding: 8px 14px; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-controls .nav-btn span:last-child { display: none; }
+            .nav-btn { padding: 8px 10px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .pdf-grid { grid-template-columns: 1fr 1fr; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .hero-cta, .hero-cta-secondary { width: 100%; justify-content: center; }
+        }
+
+        /* ===== Fade In ===== */
+        .fade-in {
+            animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" role="navigation">
+        <a href="#" class="nav-logo">
+            <img src="EduFlora.png" alt="EduFlora Logo" id="logoImg" style="width:42px;height:42px;object-fit:contain;">
+            <div class="nav-logo-text">
+                <span class="brand"><span>School</span> Management</span>
+                <span class="sub" data-i18n="nav_sub">Complete ERP Platform</span>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#features" data-i18n="nav_features">Features</a></li>
+            <li><a href="#screenshots" data-i18n="nav_screenshots">Screenshots</a></li>
+            <li><a href="#pdfs" data-i18n="nav_pdfs">PDF Docs</a></li>
+            <li><a href="#tech" data-i18n="nav_tech">Tech Stack</a></li>
+            <li><a href="#stats" data-i18n="nav_stats">Stats</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <button class="nav-btn" id="langToggle" onclick="toggleLanguage()">
+                <span class="icon">🌐</span>
+                <span>EN</span>
+            </button>
+            <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">
+                <span class="icon" id="themeIcon">🌙</span>
+                <span id="themeLabel" data-i18n="dark_btn">Dark</span>
+            </button>
+            <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== Mobile Menu ===== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" onclick="closeMobileMenu()" data-i18n="nav_features">Features</a>
+        <a href="#screenshots" onclick="closeMobileMenu()" data-i18n="nav_screenshots">Screenshots</a>
+        <a href="#pdfs" onclick="closeMobileMenu()" data-i18n="nav_pdfs">PDF Documents</a>
+        <a href="#tech" onclick="closeMobileMenu()" data-i18n="nav_tech">Tech Stack</a>
+        <a href="#stats" onclick="closeMobileMenu()" data-i18n="nav_stats">Statistics</a>
+        <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav_contact">Contact</a>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero section-bg">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="hero-content fade-in">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span data-i18n="hero_badge">🚀 All-in-One ERP Solution</span>
+            </div>
+            <h1>
+                <span data-i18n="hero_title_line1">Complete</span>
+                <span class="highlight" data-i18n="hero_title_highlight">School Management</span><br>
+                <span data-i18n="hero_title_line2">Platform</span>
+            </h1>
+            <p data-i18n="hero_desc">A full-featured school/institution management ERP system built with Django REST Framework and React. Manage everything from students to payroll in one unified platform with 14 powerful modules.</p>
+
+            <div class="hero-actions">
+                <button class="hero-cta" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+                    <span data-i18n="hero_cta">Explore All Features</span>
+                    <span>→</span>
+                </button>
+                <a href="#screenshots" class="hero-cta-secondary">
+                    <span>📸</span>
+                    <span data-i18n="hero_cta2">View Screenshots</span>
+                </a>
+            </div>
+
+            <div class="hero-roles">
+                <div class="hero-role role-admin">
+                    <span class="role-dot"></span>
+                    <span data-i18n="role_admin">Admin</span>
+                </div>
+                <div class="hero-role role-teacher">
+                    <span class="role-dot"></span>
+                    <span data-i18n="role_teacher">Teacher</span>
+                </div>
+                <div class="hero-role role-student">
+                    <span class="role-dot"></span>
+                    <span data-i18n="role_student">Student</span>
+                </div>
+                <div class="hero-role role-parent">
+                    <span class="role-dot"></span>
+                    <span data-i18n="role_parent">Parent</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll-indicator">
+            <span data-i18n="scroll_text">Scroll</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats-section section-bg" id="stats">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="section-content">
+            <div class="section">
+                <div class="section-header reveal">
+                    <h2 data-i18n="stats_title">Platform at a <span class="highlight">Glance</span></h2>
+                    <p data-i18n="stats_desc">Comprehensive metrics that define our school management ecosystem</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card reveal reveal-delay-1">
+                        <span class="stat-icon">📦</span>
+                        <div class="stat-number" data-count="14">0</div>
+                        <div class="stat-label" data-i18n="stat_modules">Powerful Modules</div>
+                    </div>
+                    <div class="stat-card reveal reveal-delay-2">
+                        <span class="stat-icon">🔗</span>
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label" data-i18n="stat_apis">API Endpoints</div>
+                    </div>
+                    <div class="stat-card reveal reveal-delay-3">
+                        <span class="stat-icon">📄</span>
+                        <div class="stat-number" data-count="14">0</div>
+                        <div class="stat-label" data-i18n="stat_pdfs">PDF Documents</div>
+                    </div>
+                    <div class="stat-card reveal reveal-delay-4">
+                        <span class="stat-icon">👥</span>
+                        <div class="stat-number" data-count="4">0</div>
+                        <div class="stat-label" data-i18n="stat_roles">User Roles</div>
+                    </div>
+                    <div class="stat-card reveal">
+                        <span class="stat-icon">🌐</span>
+                        <div class="stat-number" data-count="2">0</div>
+                        <div class="stat-label" data-i18n="stat_langs">Languages (EN/BN)</div>
+                    </div>
+                    <div class="stat-card reveal">
+                        <span class="stat-icon">🛡️</span>
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label" data-i18n="stat_secure">Secure by Default</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features-section section-bg" id="features">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="section-content">
+            <div class="section">
+                <div class="section-header reveal">
+                    <h2 data-i18n="features_title">All <span class="highlight">Features</span> & Modules</h2>
+                    <p data-i18n="features_desc">14 powerful modules covering every aspect of school management — from admissions to payroll</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="features-grid">
+
+                    <!-- 1. User & Auth -->
+                    <div class="feature-card reveal reveal-delay-1">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#fee2e2;color:#ef4444;">🔐</div>
+                            <span class="feature-tag" style="background:#fee2e2;color:#ef4444;" data-i18n="tag_core">Core</span>
+                        </div>
+                        <h3 data-i18n="f1_title">User & Authentication</h3>
+                        <p data-i18n="f1_desc">Multi-role system with JWT token authentication. Role-based access control, password management, and user search.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f1_d1">4 user roles (Admin/Teacher/Student/Parent)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f1_d2">JWT Access (1hr) + Refresh (7 days) tokens</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f1_d3">Admin can change any user's password</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f1_d4">UUID-based user IDs</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Academics -->
+                    <div class="feature-card reveal reveal-delay-2">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#dbeafe;color:#2563eb;">📚</div>
+                            <span class="feature-tag" style="background:#dbeafe;color:#2563eb;" data-i18n="tag_core">Core</span>
+                        </div>
+                        <h3 data-i18n="f2_title">Academic Structure</h3>
+                        <p data-i18n="f2_desc">Manage classes, sections, groups, subjects, and weekly routines with ease.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f2_d1">Class Levels (6-12) & Sections (Padma/Meghna/Jamuna)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f2_d2">Groups: Science, Arts, Commerce</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f2_d3">Subjects with unique codes per class</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f2_d4">Weekly routine: day/period/teacher/room</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Teachers -->
+                    <div class="feature-card reveal reveal-delay-3">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#e0e7ff;color:#4f46e5;">👨‍🏫</div>
+                            <span class="feature-tag" style="background:#e0e7ff;color:#4f46e5;" data-i18n="tag_hr">HR</span>
+                        </div>
+                        <h3 data-i18n="f3_title">Teacher Management</h3>
+                        <p data-i18n="f3_desc">Complete teacher lifecycle management with profiles, attendance, and class tracking.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f3_d1">Auto-generated teacher ID with photo & NID</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f3_d2">Daily attendance (Present/Absent/Late/Leave)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f3_d3">Class history recording per subject/topic</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f3_d4">PDF: ID Card & Appointment Letter</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Students -->
+                    <div class="feature-card reveal reveal-delay-4">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#d1fae5;color:#059669;">👩‍🎓</div>
+                            <span class="feature-tag" style="background:#d1fae5;color:#059669;" data-i18n="tag_core">Core</span>
+                        </div>
+                        <h3 data-i18n="f4_title">Student Management</h3>
+                        <p data-i18n="f4_desc">End-to-end student management with profiles, attendance tracking, and reporting.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f4_d1">Auto student ID with personal & academic info</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f4_d2">Daily attendance (Present/Absent/Late/Holiday)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f4_d3">Monthly attendance summary with %</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f4_d4">PDF: ID Card & Attendance Report</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Parent Portal -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#fef3c7;color:#d97706;">👨‍👩‍👧</div>
+                            <span class="feature-tag" style="background:#fef3c7;color:#d97706;" data-i18n="tag_portal">Portal</span>
+                        </div>
+                        <h3 data-i18n="f5_title">Parent Portal</h3>
+                        <p data-i18n="f5_desc">Real-time child tracking: attendance, results, fees, and direct teacher messaging.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f5_d1">Dashboard with attendance, results & fee status</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f5_d2">Direct messaging with teachers (reply threads)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f5_d3">Real-time read status & conversation history</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f5_d4">School notices & announcements</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Exams -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#fce7f3;color:#db2777;">📝</div>
+                            <span class="feature-tag" style="background:#fce7f3;color:#db2777;" data-i18n="tag_academic">Academic</span>
+                        </div>
+                        <h3 data-i18n="f6_title">Examination System</h3>
+                        <p data-i18n="f6_desc">Complete exam lifecycle from creation to results with 4 PDF documents.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f6_d1">Exam creation per class with academic year</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f6_d2">Grade system (A+ to F) with auto-calculation</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f6_d3">Class tests per subject/section</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f6_d4">PDF: Routine, Tabulation, Marksheet, Admit Card</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Payments -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#dbeafe;color:#2563eb;">💰</div>
+                            <span class="feature-tag" style="background:#dbeafe;color:#2563eb;" data-i18n="tag_finance">Finance</span>
+                        </div>
+                        <h3 data-i18n="f7_title">Fee Management</h3>
+                        <p data-i18n="f7_desc">Flexible fee collection with multiple categories, payment methods, and receipts.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f7_d1">Custom fee heads (Tuition, Bus, Lab, Library, etc.)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f7_d2">Multi-item receipts with auto numbering</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f7_d3">Payment methods: Cash, Online, Cheque</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f7_d4">Due tracking & professional receipt PDF</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Accounts -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#e0e7ff;color:#4f46e5;">📊</div>
+                            <span class="feature-tag" style="background:#e0e7ff;color:#4f46e5;" data-i18n="tag_finance">Finance</span>
+                        </div>
+                        <h3 data-i18n="f8_title">Accounts & Bookkeeping</h3>
+                        <p data-i18n="f8_desc">Full accounting system with income/expense tracking and period-wise reports.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f8_d1">Customizable income/expense heads</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f8_d2">Daily transaction recording</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f8_d3">Head-wise filtering & summaries</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f8_d4">PDF: Period-wise accounts report</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Inventory -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#d1fae5;color:#059669;">📦</div>
+                            <span class="feature-tag" style="background:#d1fae5;color:#059669;" data-i18n="tag_ops">Operations</span>
+                        </div>
+                        <h3 data-i18n="f9_title">Inventory Management</h3>
+                        <p data-i18n="f9_desc">Track products, stock levels, and distribution across the institution.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f9_d1">Product categories (Books, Stationery, Lab, etc.)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f9_d2">Stock tracking with units (pcs/kg/box)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f9_d3">Distribution to class or individual</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f9_d4">Notes & date tracking</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 10. Staff -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#fef3c7;color:#d97706;">👔</div>
+                            <span class="feature-tag" style="background:#fef3c7;color:#d97706;" data-i18n="tag_hr">HR</span>
+                        </div>
+                        <h3 data-i18n="f10_title">Staff Management</h3>
+                        <p data-i18n="f10_desc">Manage non-teaching staff with departments, designations, and appointments.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f10_d1">Departments: Admin, Accounts, Library, Lab, etc.</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f10_d2">Designations with department mapping</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f10_d3">Staff profiles with NID, salary, status</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f10_d4">PDF: Appointment Letter</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 11. Payroll -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#fce7f3;color:#db2777;">💸</div>
+                            <span class="feature-tag" style="background:#fce7f3;color:#db2777;" data-i18n="tag_hr">HR</span>
+                        </div>
+                        <h3 data-i18n="f11_title">Payroll Management</h3>
+                        <p data-i18n="f11_desc">Unified payroll for teachers & staff with full salary structure and reporting.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f11_d1">Bank details, allowances, deductions setup</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f11_d2">Leave types: Casual, Sick, Earned, Maternity, etc.</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f11_d3">Loan/advance salary with EMI tracking</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f11_d4">3 PDFs: Payslip, Salary Statement, Collective</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 12. CMS -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#fee2e2;color:#ef4444;">📢</div>
+                            <span class="feature-tag" style="background:#fee2e2;color:#ef4444;" data-i18n="tag_web">Website</span>
+                        </div>
+                        <h3 data-i18n="f12_title">Content Management</h3>
+                        <p data-i18n="f12_desc">Full public website with hero slides, notices, events, blogs, and more.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f12_d1">Hero slides with bilingual (EN/BN) titles & CTAs</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f12_d2">Notices (5 categories), events with gallery</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f12_d3">FAQs, blogs, contact forms, event registration</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f12_d4">60+ public pages</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 13. Notifications -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#dbeafe;color:#2563eb;">📱</div>
+                            <span class="feature-tag" style="background:#dbeafe;color:#2563eb;" data-i18n="tag_comm">Communication</span>
+                        </div>
+                        <h3 data-i18n="f13_title">Notifications & Messaging</h3>
+                        <p data-i18n="f13_desc">Internal notifications, parent-teacher chat, and SMS/WhatsApp gateway.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f13_d1">System-level internal notifications (read/unread)</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f13_d2">Parent-teacher messaging with image attachments</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f13_d3">Reply threads with full conversation history</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f13_d4">SMS/WhatsApp gateway logging</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 14. Recruitment -->
+                    <div class="feature-card reveal">
+                        <div class="card-shine"></div>
+                        <div class="feature-card-top">
+                            <div class="feature-icon" style="background:#e0e7ff;color:#4f46e5;">💼</div>
+                            <span class="feature-tag" style="background:#e0e7ff;color:#4f46e5;" data-i18n="tag_hr">HR</span>
+                        </div>
+                        <h3 data-i18n="f14_title">Recruitment System</h3>
+                        <p data-i18n="f14_desc">Post jobs, accept applications, and manage hiring pipeline.</p>
+                        <div class="feature-details">
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f14_d1">Job postings with requirements & deadline</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f14_d2">Online applications with resume upload</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f14_d3">Status pipeline: Applied → Shortlisted → Selected</span></div>
+                            <div class="feature-detail-item"><span class="check">✓</span> <span data-i18n="f14_d4">Internal notes & admin panel</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCREENSHOTS ===== -->
+    <section class="screenshots-section section-bg" id="screenshots">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="section-content">
+            <div class="section">
+                <div class="section-header reveal">
+                    <h2 data-i18n="ss_title">Feature <span class="highlight">Screenshots</span></h2>
+                    <p data-i18n="ss_desc">Visual preview of the platform's key features and dashboards</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="screenshot-grid">
+                    <div class="screenshot-card ss-0 reveal reveal-delay-1">
+                        <div class="screenshot-placeholder">
+                            <span class="placeholder-icon">🖥️</span>
+                            <span class="placeholder-label">Screenshot</span>
+                        </div>
+                        <div class="screenshot-info">
+                            <h4 data-i18n="ss1_title">Admin Dashboard</h4>
+                            <p data-i18n="ss1_desc">Complete overview with stats, charts, and quick access to all modules</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card ss-1 reveal reveal-delay-2">
+                        <div class="screenshot-placeholder">
+                            <span class="placeholder-icon">📊</span>
+                            <span class="placeholder-label">Screenshot</span>
+                        </div>
+                        <div class="screenshot-info">
+                            <h4 data-i18n="ss2_title">Student Management</h4>
+                            <p data-i18n="ss2_desc">Student profiles, attendance tracking, and monthly summaries</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card ss-2 reveal reveal-delay-3">
+                        <div class="screenshot-placeholder">
+                            <span class="placeholder-icon">📝</span>
+                            <span class="placeholder-label">Screenshot</span>
+                        </div>
+                        <div class="screenshot-info">
+                            <h4 data-i18n="ss3_title">Examination System</h4>
+                            <p data-i18n="ss3_desc">Exam routine, marks entry, grade calculation, and results</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card ss-3 reveal reveal-delay-4">
+                        <div class="screenshot-placeholder">
+                            <span class="placeholder-icon">💰</span>
+                            <span class="placeholder-label">Screenshot</span>
+                        </div>
+                        <div class="screenshot-info">
+                            <h4 data-i18n="ss4_title">Fee Management</h4>
+                            <p data-i18n="ss4_desc">Fee collection, multi-item receipts, payment tracking, and reports</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card ss-4 reveal">
+                        <div class="screenshot-placeholder">
+                            <span class="placeholder-icon">👨‍👩‍👧</span>
+                            <span class="placeholder-label">Screenshot</span>
+                        </div>
+                        <div class="screenshot-info">
+                            <h4 data-i18n="ss5_title">Parent Portal</h4>
+                            <p data-i18n="ss5_desc">Child's attendance, results, fees, and direct teacher messaging</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-card ss-5 reveal">
+                        <div class="screenshot-placeholder">
+                            <span class="placeholder-icon">💸</span>
+                            <span class="placeholder-label">Screenshot</span>
+                        </div>
+                        <div class="screenshot-info">
+                            <h4 data-i18n="ss6_title">Payroll & HR</h4>
+                            <p data-i18n="ss6_desc">Salary management, leave tracking, loan management, and payslips</p>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align:center;margin-top:20px;color:var(--text-muted);font-size:0.9rem;" data-i18n="ss_note">📸 Add your actual screenshots here — replace the placeholder areas with images</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PDF DOCUMENTS ===== -->
+    <section class="section-pdf section-bg" id="pdfs">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="section-content">
+            <div class="section">
+                <div class="section-header reveal">
+                    <h2>📄 <span class="highlight" data-i18n="pdf_title">14 PDF Documents</span></h2>
+                    <p data-i18n="pdf_desc">Professionally generated PDFs for all official needs — ready to print</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="pdf-grid">
+                    <div class="pdf-card reveal reveal-delay-1">
+                        <span class="pdf-icon">📊</span>
+                        <h4 data-i18n="pdf1">Accounts Report</h4>
+                        <div class="pdf-module" data-i18n="mod_accounts">Accounts</div>
+                    </div>
+                    <div class="pdf-card reveal reveal-delay-2">
+                        <span class="pdf-icon">📅</span>
+                        <h4 data-i18n="pdf2">Exam Routine</h4>
+                        <div class="pdf-module" data-i18n="mod_exams">Exams</div>
+                    </div>
+                    <div class="pdf-card reveal reveal-delay-3">
+                        <span class="pdf-icon">📋</span>
+                        <h4 data-i18n="pdf3">Tabulation Sheet</h4>
+                        <div class="pdf-module" data-i18n="mod_exams">Exams</div>
+                    </div>
+                    <div class="pdf-card reveal reveal-delay-4">
+                        <span class="pdf-icon">🎓</span>
+                        <h4 data-i18n="pdf4">Individual Marksheet</h4>
+                        <div class="pdf-module" data-i18n="mod_exams">Exams</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">🪪</span>
+                        <h4 data-i18n="pdf5">Admit Cards (Bulk)</h4>
+                        <div class="pdf-module" data-i18n="mod_exams">Exams</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">🧾</span>
+                        <h4 data-i18n="pdf6">Payment Receipt</h4>
+                        <div class="pdf-module" data-i18n="mod_payments">Payments</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">🆔</span>
+                        <h4 data-i18n="pdf7">Student ID Card</h4>
+                        <div class="pdf-module" data-i18n="mod_students">Students</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">📈</span>
+                        <h4 data-i18n="pdf8">Attendance Report</h4>
+                        <div class="pdf-module" data-i18n="mod_students">Students</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">🆔</span>
+                        <h4 data-i18n="pdf9">Teacher ID Card</h4>
+                        <div class="pdf-module" data-i18n="mod_teachers">Teachers</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">📜</span>
+                        <h4 data-i18n="pdf10">Teacher Appointment</h4>
+                        <div class="pdf-module" data-i18n="mod_teachers">Teachers</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">📜</span>
+                        <h4 data-i18n="pdf11">Staff Appointment</h4>
+                        <div class="pdf-module" data-i18n="mod_staffs">Staffs</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">💵</span>
+                        <h4 data-i18n="pdf12">Payslip</h4>
+                        <div class="pdf-module" data-i18n="mod_payroll">Payroll</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">📑</span>
+                        <h4 data-i18n="pdf13">Salary Statement</h4>
+                        <div class="pdf-module" data-i18n="mod_payroll">Payroll</div>
+                    </div>
+                    <div class="pdf-card reveal">
+                        <span class="pdf-icon">📊</span>
+                        <h4 data-i18n="pdf14">Collective Statement</h4>
+                        <div class="pdf-module" data-i18n="mod_payroll">Payroll</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TECH STACK ===== -->
+    <section class="tech-section section-bg" id="tech">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="section-content">
+            <div class="section">
+                <div class="section-header reveal">
+                    <h2>🛠️ <span class="highlight" data-i18n="tech_title">Technology Stack</span></h2>
+                    <p data-i18n="tech_desc">Modern, scalable, and secure technologies powering the platform</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-card reveal reveal-delay-1">
+                        <h3>🔵 Backend</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">Django 6.0</span>
+                            <span class="tech-badge">DRF 3.17</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">SimpleJWT</span>
+                            <span class="tech-badge">WeasyPrint</span>
+                            <span class="tech-badge">pyHanko</span>
+                            <span class="tech-badge">CORS Headers</span>
+                            <span class="tech-badge">django-environ</span>
+                            <span class="tech-badge">psycopg2</span>
+                            <span class="tech-badge">ReportLab</span>
+                        </div>
+                    </div>
+                    <div class="tech-card reveal reveal-delay-2">
+                        <h3>⚛️ Frontend</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">React 19</span>
+                            <span class="tech-badge">Vite 8</span>
+                            <span class="tech-badge">Tailwind CSS 4</span>
+                            <span class="tech-badge">React Router 7</span>
+                            <span class="tech-badge">TanStack Query</span>
+                            <span class="tech-badge">Zustand</span>
+                            <span class="tech-badge">Framer Motion</span>
+                            <span class="tech-badge">Recharts</span>
+                            <span class="tech-badge">i18next</span>
+                            <span class="tech-badge">Axios</span>
+                            <span class="tech-badge">Lucide Icons</span>
+                        </div>
+                    </div>
+                    <div class="tech-card reveal reveal-delay-3">
+                        <h3>🔒 Security & Tools</h3>
+                        <div class="tech-list">
+                            <span class="tech-badge">JWT Auth</span>
+                            <span class="tech-badge">RBAC</span>
+                            <span class="tech-badge">Password Encryption</span>
+                            <span class="tech-badge">CORS Protection</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">ESLint</span>
+                            <span class="tech-badge">QR Codes</span>
+                            <span class="tech-badge">PDF Signing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="section-bg" id="contact" style="background:var(--bg-secondary);">
+        <!-- Animated background (hero-style) -->
+        <div class="bg-particles">
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+            <div class="bg-particle"></div><div class="bg-particle"></div>
+        </div>
+        <div class="bg-grid"></div>
+        <div class="bg-glows"><div class="bg-glow"></div><div class="bg-glow"></div></div>
+
+        <div class="section-content">
+            <div class="section" style="max-width:1280px;margin:0 auto;padding:90px 2rem;">
+                <div class="section-header reveal">
+                    <h2 data-i18n="contact_title"><span class="highlight">Contact</span> Us</h2>
+                    <p data-i18n="contact_desc">Get in touch with us for any questions, support, or partnership inquiries</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="contact-wrapper">
+                    <!-- Contact Form -->
+                    <div class="contact-form reveal">
+                        <h3 data-i18n="form_title">Send us a Message</h3>
+                        <p data-i18n="form_desc">We'll get back to you within 24 hours</p>
+                        <form id="contactForm" onsubmit="handleContactForm(event)">
+                            <div class="form-group">
+                                <label for="formName" data-i18n="form_name">Your Name</label>
+                                <input type="text" id="formName" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formEmail" data-i18n="form_email">Email Address</label>
+                                <input type="email" id="formEmail" name="email" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formSubject" data-i18n="form_subject">Subject</label>
+                                <select id="formSubject" name="subject" required>
+                                    <option value="" data-i18n="form_sub_placeholder">Select a subject...</option>
+                                    <option value="general" data-i18n="form_sub_general">General Inquiry</option>
+                                    <option value="support" data-i18n="form_sub_support">Technical Support</option>
+                                    <option value="partnership" data-i18n="form_sub_partner">Partnership</option>
+                                    <option value="demo" data-i18n="form_sub_demo">Request a Demo</option>
+                                    <option value="other" data-i18n="form_sub_other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="formMessage" data-i18n="form_message">Your Message</label>
+                                <textarea id="formMessage" name="message" placeholder="Write your message here..." required></textarea>
+                            </div>
+                            <button type="submit" class="form-submit-btn" data-i18n="form_send">Send Message →</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info reveal">
+                        <div class="contact-info-card">
+                            <h3>📞 <span data-i18n="ci_channel_title">Contact Channels</span></h3>
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/8801410674761" target="_blank" class="contact-link" rel="noopener">
+                                <span class="link-icon" style="background:#dcfce7;color:#16a34a;">💬</span>
+                                <div>
+                                    <div class="link-label" data-i18n="ci_whatsapp">WhatsApp</div>
+                                    <div class="link-value">+880 1410-674761</div>
+                                </div>
+                            </a>
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/neonfloratech" target="_blank" class="contact-link" rel="noopener">
+                                <span class="link-icon" style="background:#dbeafe;color:#2563eb;">📘</span>
+                                <div>
+                                    <div class="link-label" data-i18n="ci_facebook">Facebook</div>
+                                    <div class="link-value">facebook.com/neonfloratech</div>
+                                </div>
+                            </a>
+                            <!-- Website -->
+                            <a href="https://neonfloratech.com" target="_blank" class="contact-link" rel="noopener">
+                                <span class="link-icon" style="background:#fef3c7;color:#d97706;">🌐</span>
+                                <div>
+                                    <div class="link-label" data-i18n="ci_website">Website</div>
+                                    <div class="link-value">neonfloratech.com</div>
+                                </div>
+                            </a>
+                            <!-- Email -->
+                            <a href="mailto:info@neonfloratech.com" class="contact-link">
+                                <span class="link-icon" style="background:#fce7f3;color:#db2777;">✉️</span>
+                                <div>
+                                    <div class="link-label" data-i18n="ci_email">Email</div>
+                                    <div class="link-value">info@neonfloratech.com</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="contact-info-card">
+                            <h3>🕐 <span data-i18n="ci_hours_title">Office Hours</span></h3>
+                            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;color:var(--text-secondary);font-size:0.9rem;">
+                                <div><strong data-i18n="ci_hours_week">Sat - Thu:</strong></div>
+                                <div>9:00 AM - 6:00 PM</div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;color:var(--text-secondary);font-size:0.9rem;">
+                                <div><strong data-i18n="ci_hours_friday">Friday:</strong></div>
+                                <div style="color:var(--danger);" data-i18n="ci_hours_closed">Closed</div>
+                            </div>
+                        </div>
+                        <div class="cta-card" style="padding:32px 24px;">
+                            <h2 style="font-size:1.3rem;position:relative;" data-i18n="cta_mini_title">Ready to Start?</h2>
+                            <p style="font-size:0.9rem;opacity:0.9;margin-bottom:20px;position:relative;" data-i18n="cta_mini_desc">Get the complete school management platform for your institution.</p>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;position:relative;">
+                                <button class="cta-btn" style="padding:12px 24px;font-size:0.85rem;" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+                                    <span data-i18n="cta_btn1">Explore Features</span>
+                                </button>
+                                <a href="https://wa.me/8801410674761" target="_blank" class="cta-btn" style="padding:12px 24px;font-size:0.85rem;background:transparent;color:white;border:2px solid rgba(255,255,255,0.3);text-decoration:none;">
+                                    <span data-i18n="cta_whatsapp">Chat on WhatsApp</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                    <img src="EduFlora.png" alt="EduFlora Logo" style="width:48px;height:48px;object-fit:contain;border-radius:10px;">
+                    <h3 style="margin-bottom:0;"><span>School</span> Management</h3>
+                </div>
+                <p data-i18n="footer_desc">A complete ERP system for educational institutions. Built with Django REST Framework & React. Open source and community-driven.</p>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/neonfloratech" target="_blank" title="Facebook" rel="noopener">📘</a>
+                    <a href="https://wa.me/8801410674761" target="_blank" title="WhatsApp" rel="noopener">💬</a>
+                    <a href="https://neonfloratech.com" target="_blank" title="Website" rel="noopener">🌐</a>
+                    <a href="mailto:info@neonfloratech.com" title="Email">✉️</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_modules">Modules</h4>
+                <ul>
+                    <li><a href="#features" data-i18n="footer_m1">Academics</a></li>
+                    <li><a href="#features" data-i18n="footer_m2">Teachers & Students</a></li>
+                    <li><a href="#features" data-i18n="footer_m3">Exams & Results</a></li>
+                    <li><a href="#features" data-i18n="footer_m4">Payments & Accounts</a></li>
+                    <li><a href="#features" data-i18n="footer_m5">Payroll & HR</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_resources">Resources</h4>
+                <ul>
+                    <li><a href="#pdfs" data-i18n="footer_r1">PDF Documents</a></li>
+                    <li><a href="#tech" data-i18n="footer_r2">Technology Stack</a></li>
+                    <li><a href="#screenshots" data-i18n="footer_r3">Screenshots</a></li>
+                    <li><a href="#stats" data-i18n="footer_r4">Statistics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_company">Company</h4>
+                <ul>
+                    <li><a href="#" data-i18n="footer_c1">About Us</a></li>
+                    <li><a href="#" data-i18n="footer_c2">Contact</a></li>
+                    <li><a href="#" data-i18n="footer_c3">Privacy Policy</a></li>
+                    <li><a href="#" data-i18n="footer_c4">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><span data-i18n="footer_text">© 2026 School Management Platform. Built with Django & React.</span> <span data-i18n="footer_rights">All rights reserved.</span></p>
+            <div class="footer-bottom-links">
+                <a href="#" data-i18n="footer_bl1">Privacy</a>
+                <a href="#" data-i18n="footer_bl2">Terms</a>
+                <a href="#" data-i18n="footer_bl3">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== TRANSLATIONS =====
+        const translations = {
+            en: {
+                lang_btn: 'EN',
+                dark_btn: 'Dark',
+                light_btn: 'Light',
+                nav_sub: 'Complete ERP Platform',
+                nav_features: 'Features',
+                nav_screenshots: 'Screenshots',
+                nav_pdfs: 'PDF Docs',
+                nav_tech: 'Tech Stack',
+                nav_stats: 'Stats',
+                nav_contact: 'Contact',
+                scroll_text: 'Scroll',
+                hero_badge: '🚀 All-in-One ERP Solution',
+                hero_title_line1: 'Complete',
+                hero_title_highlight: 'School Management',
+                hero_title_line2: 'Platform',
+                hero_desc: 'A full-featured school/institution management ERP system built with Django REST Framework and React. Manage everything from students to payroll in one unified platform with 14 powerful modules.',
+                hero_cta: 'Explore All Features',
+                hero_cta2: 'View Screenshots',
+                role_admin: 'Admin',
+                role_teacher: 'Teacher',
+                role_student: 'Student',
+                role_parent: 'Parent',
+                stats_title: 'Platform at a',
+                stats_desc: 'Comprehensive metrics that define our school management ecosystem',
+                stat_modules: 'Powerful Modules',
+                stat_apis: 'API Endpoints',
+                stat_pdfs: 'PDF Documents',
+                stat_roles: 'User Roles',
+                stat_langs: 'Languages (EN/BN)',
+                stat_secure: 'Secure by Default',
+                features_title: 'All',
+                features_desc: '14 powerful modules covering every aspect of school management — from admissions to payroll',
+                tag_core: 'Core',
+                tag_hr: 'HR',
+                tag_portal: 'Portal',
+                tag_academic: 'Academic',
+                tag_finance: 'Finance',
+                tag_ops: 'Operations',
+                tag_web: 'Website',
+                tag_comm: 'Communication',
+                f1_title: 'User & Authentication',
+                f1_desc: 'Multi-role system with JWT token authentication. Role-based access control, password management, and user search.',
+                f1_d1: '4 user roles (Admin/Teacher/Student/Parent)',
+                f1_d2: 'JWT Access (1hr) + Refresh (7 days) tokens',
+                f1_d3: 'Admin can change any user\'s password',
+                f1_d4: 'UUID-based user IDs',
+                f2_title: 'Academic Structure',
+                f2_desc: 'Manage classes, sections, groups, subjects, and weekly routines with ease.',
+                f2_d1: 'Class Levels (6-12) & Sections (Padma/Meghna/Jamuna)',
+                f2_d2: 'Groups: Science, Arts, Commerce',
+                f2_d3: 'Subjects with unique codes per class',
+                f2_d4: 'Weekly routine: day/period/teacher/room',
+                f3_title: 'Teacher Management',
+                f3_desc: 'Complete teacher lifecycle management with profiles, attendance, and class tracking.',
+                f3_d1: 'Auto-generated teacher ID with photo & NID',
+                f3_d2: 'Daily attendance (Present/Absent/Late/Leave)',
+                f3_d3: 'Class history recording per subject/topic',
+                f3_d4: 'PDF: ID Card & Appointment Letter',
+                f4_title: 'Student Management',
+                f4_desc: 'End-to-end student management with profiles, attendance tracking, and reporting.',
+                f4_d1: 'Auto student ID with personal & academic info',
+                f4_d2: 'Daily attendance (Present/Absent/Late/Holiday)',
+                f4_d3: 'Monthly attendance summary with %',
+                f4_d4: 'PDF: ID Card & Attendance Report',
+                f5_title: 'Parent Portal',
+                f5_desc: 'Real-time child tracking: attendance, results, fees, and direct teacher messaging.',
+                f5_d1: 'Dashboard with attendance, results & fee status',
+                f5_d2: 'Direct messaging with teachers (reply threads)',
+                f5_d3: 'Real-time read status & conversation history',
+                f5_d4: 'School notices & announcements',
+                f6_title: 'Examination System',
+                f6_desc: 'Complete exam lifecycle from creation to results with 4 PDF documents.',
+                f6_d1: 'Exam creation per class with academic year',
+                f6_d2: 'Grade system (A+ to F) with auto-calculation',
+                f6_d3: 'Class tests per subject/section',
+                f6_d4: 'PDF: Routine, Tabulation, Marksheet, Admit Card',
+                f7_title: 'Fee Management',
+                f7_desc: 'Flexible fee collection with multiple categories, payment methods, and receipts.',
+                f7_d1: 'Custom fee heads (Tuition, Bus, Lab, Library, etc.)',
+                f7_d2: 'Multi-item receipts with auto numbering',
+                f7_d3: 'Payment methods: Cash, Online, Cheque',
+                f7_d4: 'Due tracking & professional receipt PDF',
+                f8_title: 'Accounts & Bookkeeping',
+                f8_desc: 'Full accounting system with income/expense tracking and period-wise reports.',
+                f8_d1: 'Customizable income/expense heads',
+                f8_d2: 'Daily transaction recording',
+                f8_d3: 'Head-wise filtering & summaries',
+                f8_d4: 'PDF: Period-wise accounts report',
+                f9_title: 'Inventory Management',
+                f9_desc: 'Track products, stock levels, and distribution across the institution.',
+                f9_d1: 'Product categories (Books, Stationery, Lab, etc.)',
+                f9_d2: 'Stock tracking with units (pcs/kg/box)',
+                f9_d3: 'Distribution to class or individual',
+                f9_d4: 'Notes & date tracking',
+                f10_title: 'Staff Management',
+                f10_desc: 'Manage non-teaching staff with departments, designations, and appointments.',
+                f10_d1: 'Departments: Admin, Accounts, Library, Lab, etc.',
+                f10_d2: 'Designations with department mapping',
+                f10_d3: 'Staff profiles with NID, salary, status',
+                f10_d4: 'PDF: Appointment Letter',
+                f11_title: 'Payroll Management',
+                f11_desc: 'Unified payroll for teachers & staff with full salary structure and reporting.',
+                f11_d1: 'Bank details, allowances, deductions setup',
+                f11_d2: 'Leave types: Casual, Sick, Earned, Maternity, etc.',
+                f11_d3: 'Loan/advance salary with EMI tracking',
+                f11_d4: '3 PDFs: Payslip, Salary Statement, Collective',
+                f12_title: 'Content Management',
+                f12_desc: 'Full public website with hero slides, notices, events, blogs, and more.',
+                f12_d1: 'Hero slides with bilingual (EN/BN) titles & CTAs',
+                f12_d2: 'Notices (5 categories), events with gallery',
+                f12_d3: 'FAQs, blogs, contact forms, event registration',
+                f12_d4: '60+ public pages',
+                f13_title: 'Notifications & Messaging',
+                f13_desc: 'Internal notifications, parent-teacher chat, and SMS/WhatsApp gateway.',
+                f13_d1: 'System-level internal notifications (read/unread)',
+                f13_d2: 'Parent-teacher messaging with image attachments',
+                f13_d3: 'Reply threads with full conversation history',
+                f13_d4: 'SMS/WhatsApp gateway logging',
+                f14_title: 'Recruitment System',
+                f14_desc: 'Post jobs, accept applications, and manage hiring pipeline.',
+                f14_d1: 'Job postings with requirements & deadline',
+                f14_d2: 'Online applications with resume upload',
+                f14_d3: 'Status pipeline: Applied → Shortlisted → Selected',
+                f14_d4: 'Internal notes & admin panel',
+                ss_title: 'Feature',
+                ss_desc: 'Visual preview of the platform\'s key features and dashboards',
+                ss1_title: 'Admin Dashboard',
+                ss1_desc: 'Complete overview with stats, charts, and quick access to all modules',
+                ss2_title: 'Student Management',
+                ss2_desc: 'Student profiles, attendance tracking, and monthly summaries',
+                ss3_title: 'Examination System',
+                ss3_desc: 'Exam routine, marks entry, grade calculation, and results',
+                ss4_title: 'Fee Management',
+                ss4_desc: 'Fee collection, multi-item receipts, payment tracking, and reports',
+                ss5_title: 'Parent Portal',
+                ss5_desc: 'Child\'s attendance, results, fees, and direct teacher messaging',
+                ss6_title: 'Payroll & HR',
+                ss6_desc: 'Salary management, leave tracking, loan management, and payslips',
+                ss_note: '📸 Add your actual screenshots here — replace the placeholder areas with images',
+                pdf_title: '14 PDF Documents',
+                pdf_desc: 'Professionally generated PDFs for all official needs — ready to print',
+                pdf1: 'Accounts Report',
+                pdf2: 'Exam Routine',
+                pdf3: 'Tabulation Sheet',
+                pdf4: 'Individual Marksheet',
+                pdf5: 'Admit Cards (Bulk)',
+                pdf6: 'Payment Receipt',
+                pdf7: 'Student ID Card',
+                pdf8: 'Attendance Report',
+                pdf9: 'Teacher ID Card',
+                pdf10: 'Teacher Appointment',
+                pdf11: 'Staff Appointment',
+                pdf12: 'Payslip',
+                pdf13: 'Salary Statement',
+                pdf14: 'Collective Statement',
+                mod_accounts: 'Accounts',
+                mod_exams: 'Exams',
+                mod_payments: 'Payments',
+                mod_students: 'Students',
+                mod_teachers: 'Teachers',
+                mod_staffs: 'Staffs',
+                mod_payroll: 'Payroll',
+                tech_title: 'Technology Stack',
+                tech_desc: 'Modern, scalable, and secure technologies powering the platform',
+                cta_title: 'Ready to Transform Your Institution?',
+                cta_desc: 'Get started with the most comprehensive school management platform. Manage everything from one place.',
+                cta_btn1: 'Explore Features',
+                cta_btn2: 'View Gallery',
+                footer_desc: 'A complete ERP system for educational institutions. Built with Django REST Framework & React. Open source and community-driven.',
+                footer_modules: 'Modules',
+                footer_m1: 'Academics',
+                footer_m2: 'Teachers & Students',
+                footer_m3: 'Exams & Results',
+                footer_m4: 'Payments & Accounts',
+                footer_m5: 'Payroll & HR',
+                footer_resources: 'Resources',
+                footer_r1: 'PDF Documents',
+                footer_r2: 'Technology Stack',
+                footer_r3: 'Screenshots',
+                footer_r4: 'Statistics',
+                footer_company: 'Company',
+                footer_c1: 'About Us',
+                footer_c2: 'Contact',
+                footer_c3: 'Privacy Policy',
+                footer_c4: 'Terms of Service',
+                footer_text: '© 2026 School Management Platform. Built with Django & React.',
+                footer_rights: 'All rights reserved.',
+                footer_bl1: 'Privacy',
+                footer_bl2: 'Terms',
+                footer_bl3: 'Sitemap',
+                contact_title: 'Contact',
+                contact_desc: 'Get in touch with us for any questions, support, or partnership inquiries',
+                form_title: 'Send us a Message',
+                form_desc: "We'll get back to you within 24 hours",
+                form_name: 'Your Name',
+                form_email: 'Email Address',
+                form_subject: 'Subject',
+                form_sub_placeholder: 'Select a subject...',
+                form_sub_general: 'General Inquiry',
+                form_sub_support: 'Technical Support',
+                form_sub_partner: 'Partnership',
+                form_sub_demo: 'Request a Demo',
+                form_sub_other: 'Other',
+                form_message: 'Your Message',
+                form_send: 'Send Message →',
+                ci_channel_title: 'Contact Channels',
+                ci_whatsapp: 'WhatsApp',
+                ci_facebook: 'Facebook',
+                ci_website: 'Website',
+                ci_email: 'Email',
+                ci_hours_title: 'Office Hours',
+                ci_hours_week: 'Sat - Thu:',
+                ci_hours_friday: 'Friday:',
+                ci_hours_closed: 'Closed',
+                cta_mini_title: 'Ready to Start?',
+                cta_mini_desc: 'Get the complete school management platform for your institution.',
+                cta_whatsapp: 'Chat on WhatsApp'
+            },
+            bn: {
+                lang_btn: 'বাংলা',
+                dark_btn: 'ডার্ক',
+                light_btn: 'লাইট',
+                nav_sub: 'সম্পূর্ণ ইআরপি প্ল্যাটফর্ম',
+                nav_features: 'ফিচারসমূহ',
+                nav_screenshots: 'স্ক্রিনশট',
+                nav_pdfs: 'PDF ডকুমেন্ট',
+                nav_tech: 'টেক স্ট্যাক',
+                nav_stats: 'পরিসংখ্যান',
+                nav_contact: 'যোগাযোগ',
+                scroll_text: 'নিচে স্ক্রল করুন',
+                hero_badge: '🚀 অল-ইন-ওয়ান ইআরপি সলিউশন',
+                hero_title_line1: 'সম্পূর্ণ',
+                hero_title_highlight: 'স্কুল ম্যানেজমেন্ট',
+                hero_title_line2: 'প্ল্যাটফর্ম',
+                hero_desc: 'একটি সম্পূর্ণ স্কুল/প্রতিষ্ঠান ম্যানেজমেন্ট ইআরপি সিস্টেম যা Django REST Framework এবং React দিয়ে তৈরি। ১৪টি শক্তিশালী মডিউল সহ ছাত্র থেকে বেতন পর্যন্ত সবকিছু এক প্ল্যাটফর্মে পরিচালনা করুন।',
+                hero_cta: 'সব ফিচার দেখুন',
+                hero_cta2: 'স্ক্রিনশট দেখুন',
+                role_admin: 'অ্যাডমিন',
+                role_teacher: 'শিক্ষক',
+                role_student: 'ছাত্র',
+                role_parent: 'অভিভাবক',
+                stats_title: 'এক নজরে',
+                stats_desc: 'আমাদের স্কুল ম্যানেজমেন্ট ইকোসিস্টেমের বিস্তারিত পরিসংখ্যান',
+                stat_modules: 'শক্তিশালী মডিউল',
+                stat_apis: 'API এন্ডপয়েন্ট',
+                stat_pdfs: 'PDF ডকুমেন্ট',
+                stat_roles: 'ইউজার রোল',
+                stat_langs: 'ভাষা (ইংরেজি/বাংলা)',
+                stat_secure: 'ডিফল্টভাবে সুরক্ষিত',
+                features_title: 'সব',
+                features_desc: 'স্কুল ম্যানেজমেন্টের প্রতিটি দিক কভার করে ১৪টি শক্তিশালী মডিউল — ভর্তি থেকে বেতন পর্যন্ত',
+                tag_core: 'মূল',
+                tag_hr: 'এইচআর',
+                tag_portal: 'পোর্টাল',
+                tag_academic: 'একাডেমিক',
+                tag_finance: 'ফাইন্যান্স',
+                tag_ops: 'অপারেশনস',
+                tag_web: 'ওয়েবসাইট',
+                tag_comm: 'যোগাযোগ',
+                f1_title: 'ইউজার ও অথেনটিকেশন',
+                f1_desc: 'JWT টোকেন অথেনটিকেশন সহ মাল্টি-রোল সিস্টেম। রোল-ভিত্তিক অ্যাক্সেস কন্ট্রোল, পাসওয়ার্ড ম্যানেজমেন্ট ও ইউজার সার্চ।',
+                f1_d1: '৪টি ইউজার রোল (অ্যাডমিন/শিক্ষক/ছাত্র/অভিভাবক)',
+                f1_d2: 'JWT অ্যাক্সেস (১ঘণ্টা) + রিফ্রেশ (৭ দিন) টোকেন',
+                f1_d3: 'অ্যাডমিন যেকোনো ইউজারের পাসওয়ার্ড পরিবর্তন করতে পারে',
+                f1_d4: 'UUID-ভিত্তিক ইউজার আইডি',
+                f2_title: 'একাডেমিক স্ট্রাকচার',
+                f2_desc: 'সহজেই ক্লাস, সেকশন, গ্রুপ, সাবজেক্ট এবং সাপ্তাহিক রুটিন পরিচালনা করুন।',
+                f2_d1: 'ক্লাস লেভেল (৬-১২) ও সেকশন (পদ্মা/মেঘনা/যমুনা)',
+                f2_d2: 'গ্রুপ: বিজ্ঞান, মানবিক, বাণিজ্য',
+                f2_d3: 'প্রতি ক্লাসে ইউনিক কোড সহ সাবজেক্ট',
+                f2_d4: 'সাপ্তাহিক রুটিন: দিন/পিরিয়ড/শিক্ষক/রুম',
+                f3_title: 'শিক্ষক ব্যবস্থাপনা',
+                f3_desc: 'প্রোফাইল, উপস্থিতি এবং ক্লাস ট্র্যাকিং সহ সম্পূর্ণ শিক্ষক লাইফসাইকেল ম্যানেজমেন্ট।',
+                f3_d1: 'ছবি ও NID সহ অটো-জেনারেটেড শিক্ষক আইডি',
+                f3_d2: 'দৈনিক উপস্থিতি (উপস্থিত/অনুপস্থিত/দেরি/ছুটি)',
+                f3_d3: 'প্রতি সাবজেক্ট/টপিকে ক্লাস হিস্টোরি রেকর্ডিং',
+                f3_d4: 'PDF: আইডি কার্ড ও নিয়োগপত্র',
+                f4_title: 'ছাত্র ব্যবস্থাপনা',
+                f4_desc: 'প্রোফাইল, উপস্থিতি ট্র্যাকিং এবং রিপোর্টিংসহ এন্ড-টু-এন্ড ছাত্র ম্যানেজমেন্ট।',
+                f4_d1: 'ব্যক্তিগত ও একাডেমিক তথ্যসহ অটো ছাত্র আইডি',
+                f4_d2: 'দৈনিক উপস্থিতি (উপস্থিত/অনুপস্থিত/দেরি/ছুটি)',
+                f4_d3: 'শতাংশসহ মাসিক উপস্থিতি সারাংশ',
+                f4_d4: 'PDF: আইডি কার্ড ও উপস্থিতি রিপোর্ট',
+                f5_title: 'অভিভাবক পোর্টাল',
+                f5_desc: 'রিয়েল-টাইম সন্তান ট্র্যাকিং: উপস্থিতি, ফলাফল, ফি এবং শিক্ষকের সাথে সরাসরি মেসেজিং।',
+                f5_d1: 'উপস্থিতি, ফলাফল ও ফি স্ট্যাটাসসহ ড্যাশবোর্ড',
+                f5_d2: 'শিক্ষকের সাথে সরাসরি মেসেজিং (রিপ্লাই থ্রেড)',
+                f5_d3: 'রিয়েল-টাইম রিড স্ট্যাটাস ও কথোপকথনের ইতিহাস',
+                f5_d4: 'স্কুল নোটিশ ও ঘোষণা',
+                f6_title: 'পরীক্ষা ব্যবস্থাপনা',
+                f6_desc: '৪টি PDF ডকুমেন্টসহ পরীক্ষা তৈরি থেকে ফলাফল পর্যন্ত সম্পূর্ণ পরীক্ষা লাইফসাইকেল।',
+                f6_d1: 'শিক্ষাবর্ষসহ প্রতি ক্লাসে পরীক্ষা তৈরি',
+                f6_d2: 'অটো-ক্যালকুলেশনসহ গ্রেড সিস্টেম (A+ থেকে F)',
+                f6_d3: 'প্রতি সাবজেক্ট/সেকশনে ক্লাস টেস্ট',
+                f6_d4: 'PDF: রুটিন, ট্যাবুলেশন, মার্কশিট, এডমিট কার্ড',
+                f7_title: 'ফি ব্যবস্থাপনা',
+                f7_desc: 'একাধিক ক্যাটাগরি, পেমেন্ট মেথড এবং রশিদসহ নমনীয় ফি সংগ্রহ।',
+                f7_d1: 'কাস্টম ফি হেড (টিউশন, বাস, ল্যাব, লাইব্রেরি, ইত্যাদি)',
+                f7_d2: 'অটো নম্বরিংসহ মাল্টি-আইটেম রশিদ',
+                f7_d3: 'পেমেন্ট মেথড: নগদ, অনলাইন, চেক',
+                f7_d4: 'বকেয়া ট্র্যাকিং ও পেশাদার রশিদ PDF',
+                f8_title: 'অ্যাকাউন্টস ও বুককিপিং',
+                f8_desc: 'আয়/ব্যয় ট্র্যাকিং এবং পিরিয়ড-ভিত্তিক রিপোর্টসহ সম্পূর্ণ অ্যাকাউন্টিং সিস্টেম।',
+                f8_d1: 'কাস্টমাইজযোগ্য আয়/ব্যয় হেড',
+                f8_d2: 'দৈনিক লেনদেন রেকর্ডিং',
+                f8_d3: 'হেড-ভিত্তিক ফিল্টারিং ও সারাংশ',
+                f8_d4: 'PDF: পিরিয়ড-ভিত্তিক অ্যাকাউন্টস রিপোর্ট',
+                f9_title: 'ইনভেন্টরি ম্যানেজমেন্ট',
+                f9_desc: 'প্রতিষ্ঠান জুড়ে পণ্য, স্টক লেভেল এবং বিতরণ ট্র্যাক করুন।',
+                f9_d1: 'প্রোডাক্ট ক্যাটাগরি (বই, স্টেশনারী, ল্যাব, ইত্যাদি)',
+                f9_d2: 'ইউনিটসহ স্টক ট্র্যাকিং (পিস/কেজি/বক্স)',
+                f9_d3: 'ক্লাস বা ব্যক্তি পর্যায়ে বিতরণ',
+                f9_d4: 'নোট ও তারিখ ট্র্যাকিং',
+                f10_title: 'স্টাফ ব্যবস্থাপনা',
+                f10_desc: 'ডিপার্টমেন্ট, ডিজিগনেশন এবং অ্যাপয়েন্টমেন্টসহ নন-টিচিং স্টাফ ম্যানেজমেন্ট।',
+                f10_d1: 'ডিপার্টমেন্ট: অ্যাডমিন, অ্যাকাউন্টস, লাইব্রেরি, ল্যাব, ইত্যাদি',
+                f10_d2: 'ডিপার্টমেন্ট ম্যাপিংসহ ডিজিগনেশন',
+                f10_d3: 'NID, বেতন, স্ট্যাটাসসহ স্টাফ প্রোফাইল',
+                f10_d4: 'PDF: নিয়োগপত্র',
+                f11_title: 'পে-রোল ম্যানেজমেন্ট',
+                f11_desc: 'সম্পূর্ণ বেতন কাঠামো এবং রিপোর্টিংসহ শিক্ষক ও স্টাফদের জন্য ইউনিফাইড পে-রোল।',
+                f11_d1: 'ব্যাংক বিবরণ, ভাতা, কর্তন সেটআপ',
+                f11_d2: 'ছুটির ধরন: নৈমিত্তিক, অসুস্থতা, অর্জিত, মাতৃত্ব, ইত্যাদি',
+                f11_d3: 'EMI ট্র্যাকিংসহ লোন/অ্যাডভান্স বেতন',
+                f11_d4: '৩টি PDF: পে-স্লিপ, বেতন বিবরণী, সমষ্টিগত',
+                f12_title: 'কন্টেন্ট ম্যানেজমেন্ট',
+                f12_desc: 'হিরো স্লাইড, নোটিস, ইভেন্ট, ব্লগসহ সম্পূর্ণ পাবলিক ওয়েবসাইট।',
+                f12_d1: 'দ্বিভাষিক (ইংরেজি/বাংলা) টাইটেল ও CTAসহ হিরো স্লাইড',
+                f12_d2: 'নোটিস (৫ ক্যাটাগরি), গ্যালারিসহ ইভেন্ট',
+                f12_d3: 'FAQ, ব্লগ, কন্টাক্ট ফর্ম, ইভেন্ট রেজিস্ট্রেশন',
+                f12_d4: '৬০+ পাবলিক পেজ',
+                f13_title: 'নোটিফিকেশন ও মেসেজিং',
+                f13_desc: 'অভ্যন্তরীণ নোটিফিকেশন, প্যারেন্ট-টিচার চ্যাট এবং SMS/WhatsApp গেটওয়ে।',
+                f13_d1: 'সিস্টেম-লেভেল অভ্যন্তরীণ নোটিফিকেশন (পঠিত/অপঠিত)',
+                f13_d2: 'ছবি সংযুক্তিসহ প্যারেন্ট-টিচার মেসেজিং',
+                f13_d3: 'সম্পূর্ণ কথোপকথনের ইতিহাসসহ রিপ্লাই থ্রেড',
+                f13_d4: 'SMS/WhatsApp গেটওয়ে লগিং',
+                f14_title: 'রিক্রুটমেন্ট সিস্টেম',
+                f14_desc: 'চাকরির বিজ্ঞপ্তি পোস্ট করুন, আবেদন গ্রহণ করুন এবং hiring পাইপলাইন পরিচালনা করুন।',
+                f14_d1: 'প্রয়োজনীয়তা ও ডেডলাইনসহ চাকরির বিজ্ঞপ্তি',
+                f14_d2: 'রিজিউম আপলোডসহ অনলাইন আবেদন',
+                f14_d3: 'স্ট্যাটাস পাইপলাইন: Applied → Shortlisted → Selected',
+                f14_d4: 'অভ্যন্তরীণ নোট ও অ্যাডমিন প্যানেল',
+                ss_title: 'ফিচার',
+                ss_desc: 'প্ল্যাটফর্মের মূল ফিচার এবং ড্যাশবোর্ডের ভিজ্যুয়াল প্রিভিউ',
+                ss1_title: 'অ্যাডমিন ড্যাশবোর্ড',
+                ss1_desc: 'স্ট্যাটস, চার্ট এবং সব মডিউলে দ্রুত অ্যাক্সেসসহ সম্পূর্ণ ওভারভিউ',
+                ss2_title: 'ছাত্র ব্যবস্থাপনা',
+                ss2_desc: 'ছাত্র প্রোফাইল, উপস্থিতি ট্র্যাকিং এবং মাসিক সারাংশ',
+                ss3_title: 'পরীক্ষা ব্যবস্থাপনা',
+                ss3_desc: 'পরীক্ষার রুটিন, নম্বর এন্ট্রি, গ্রেড ক্যালকুলেশন এবং ফলাফল',
+                ss4_title: 'ফি ব্যবস্থাপনা',
+                ss4_desc: 'ফি সংগ্রহ, মাল্টি-আইটেম রশিদ, পেমেন্ট ট্র্যাকিং এবং রিপোর্ট',
+                ss5_title: 'অভিভাবক পোর্টাল',
+                ss5_desc: 'সন্তানের উপস্থিতি, ফলাফল, ফি এবং শিক্ষকের সাথে সরাসরি মেসেজিং',
+                ss6_title: 'পে-রোল ও এইচআর',
+                ss6_desc: 'বেতন ম্যানেজমেন্ট, ছুটি ট্র্যাকিং, লোন ম্যানেজমেন্ট এবং পে-স্লিপ',
+                ss_note: '📸 আপনার আসল স্ক্রিনশট এখানে যোগ করুন — প্লেসহোল্ডার এলাকাগুলো ছবি দিয়ে প্রতিস্থাপন করুন',
+                pdf_title: '১৪টি PDF ডকুমেন্ট',
+                pdf_desc: 'সব অফিসিয়াল প্রয়োজনের জন্য পেশাদারভাবে জেনারেটেড PDF — প্রিন্টের জন্য প্রস্তুত',
+                pdf1: 'অ্যাকাউন্টস রিপোর্ট',
+                pdf2: 'পরীক্ষার রুটিন',
+                pdf3: 'ট্যাবুলেশন শিট',
+                pdf4: 'ইন্ডিভিজুয়াল মার্কশিট',
+                pdf5: 'এডমিট কার্ড (বাল্ক)',
+                pdf6: 'পেমেন্ট রশিদ',
+                pdf7: 'ছাত্র আইডি কার্ড',
+                pdf8: 'উপস্থিতি রিপোর্ট',
+                pdf9: 'শিক্ষক আইডি কার্ড',
+                pdf10: 'শিক্ষক নিয়োগপত্র',
+                pdf11: 'স্টাফ নিয়োগপত্র',
+                pdf12: 'বেতন স্লিপ',
+                pdf13: 'বেতন বিবরণী',
+                pdf14: 'সমষ্টিগত বিবরণী',
+                mod_accounts: 'অ্যাকাউন্টস',
+                mod_exams: 'পরীক্ষা',
+                mod_payments: 'পেমেন্ট',
+                mod_students: 'ছাত্র',
+                mod_teachers: 'শিক্ষক',
+                mod_staffs: 'স্টাফ',
+                mod_payroll: 'পে-রোল',
+                tech_title: 'টেকনোলজি স্ট্যাক',
+                tech_desc: 'আধুনিক, স্কেলেবল ও সুরক্ষিত প্রযুক্তি যা প্ল্যাটফর্মকে শক্তি দেয়',
+                cta_title: 'আপনার প্রতিষ্ঠানকে রূপান্তর করতে প্রস্তুত?',
+                cta_desc: 'সবচেয়ে ব্যাপক স্কুল ম্যানেজমেন্ট প্ল্যাটফর্ম দিয়ে শুরু করুন। এক জায়গা থেকে সবকিছু পরিচালনা করুন।',
+                cta_btn1: 'ফিচার দেখুন',
+                cta_btn2: 'গ্যালারি দেখুন',
+                footer_desc: 'শিক্ষাপ্রতিষ্ঠানের জন্য একটি সম্পূর্ণ ইআরপি সিস্টেম। Django REST Framework ও React দিয়ে তৈরি। ওপেন সোর্স এবং কমিউনিটি-চালিত।',
+                footer_modules: 'মডিউল',
+                footer_m1: 'একাডেমিকস',
+                footer_m2: 'শিক্ষক ও ছাত্র',
+                footer_m3: 'পরীক্ষা ও ফলাফল',
+                footer_m4: 'পেমেন্ট ও অ্যাকাউন্টস',
+                footer_m5: 'পে-রোল ও এইচআর',
+                footer_resources: 'রিসোর্স',
+                footer_r1: 'PDF ডকুমেন্ট',
+                footer_r2: 'টেকনোলজি স্ট্যাক',
+                footer_r3: 'স্ক্রিনশট',
+                footer_r4: 'পরিসংখ্যান',
+                footer_company: 'কোম্পানি',
+                footer_c1: 'আমাদের সম্পর্কে',
+                footer_c2: 'যোগাযোগ',
+                footer_c3: 'গোপনীয়তা নীতি',
+                footer_c4: 'সেবার শর্তাবলী',
+                footer_text: '© ২০২৬ স্কুল ম্যানেজমেন্ট প্ল্যাটফর্ম। Django ও React দিয়ে তৈরি।',
+                footer_rights: 'সর্বস্বত্ব সংরক্ষিত।',
+                footer_bl1: 'গোপনীয়তা',
+                footer_bl2: 'শর্তাবলী',
+                footer_bl3: 'সাইটম্যাপ',
+                contact_title: 'যোগাযোগ',
+                contact_desc: 'যেকোনো প্রশ্ন, সহায়তা বা অংশীদারিত্বের জন্য আমাদের সাথে যোগাযোগ করুন',
+                form_title: 'আমাদের একটি বার্তা পাঠান',
+                form_desc: 'আমরা ২৪ ঘন্টার মধ্যে আপনার সাথে যোগাযোগ করব',
+                form_name: 'আপনার নাম',
+                form_email: 'ইমেইল ঠিকানা',
+                form_subject: 'বিষয়',
+                form_sub_placeholder: 'একটি বিষয় নির্বাচন করুন...',
+                form_sub_general: 'সাধারণ জিজ্ঞাসা',
+                form_sub_support: 'কারিগরি সহায়তা',
+                form_sub_partner: 'অংশীদারিত্ব',
+                form_sub_demo: 'ডেমো অনুরোধ',
+                form_sub_other: 'অন্যান্য',
+                form_message: 'আপনার বার্তা',
+                form_send: 'বার্তা পাঠান →',
+                ci_channel_title: 'যোগাযোগের চ্যানেল',
+                ci_whatsapp: 'হোয়াটসঅ্যাপ',
+                ci_facebook: 'ফেসবুক',
+                ci_website: 'ওয়েবসাইট',
+                ci_email: 'ইমেইল',
+                ci_hours_title: 'অফিস সময়',
+                ci_hours_week: 'শনি - বৃহঃ:',
+                ci_hours_friday: 'শুক্রবার:',
+                ci_hours_closed: 'বন্ধ',
+                cta_mini_title: 'শুরু করতে প্রস্তুত?',
+                cta_mini_desc: 'আপনার প্রতিষ্ঠানের জন্য সম্পূর্ণ স্কুল ম্যানেজমেন্ট প্ল্যাটফর্ম নিন।',
+                cta_whatsapp: 'হোয়াটসঅ্যাপে কথা বলুন'
+            }
+        };
+
+        // ===== STATE =====
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        // ===== LANGUAGE TOGGLE =====
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'bn' : 'en';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const langData = translations[currentLang];
+            document.documentElement.lang = currentLang === 'bn' ? 'bn' : 'en';
+            document.documentElement.setAttribute('data-lang', currentLang);
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (langData[key]) {
+                    el.innerHTML = langData[key];
+                }
+            });
+
+            const langBtn = document.getElementById('langToggle');
+            if (langBtn) {
+                const span = langBtn.querySelector('span:last-child');
+                if (span) span.textContent = currentLang === 'en' ? 'EN' : 'বাংলা';
+            }
+            updateThemeLabel();
+        }
+
+        // ===== THEME TOGGLE =====
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme();
+        }
+
+        function applyTheme() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            updateThemeLabel();
+        }
+
+        function updateThemeLabel() {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeLabel = document.getElementById('themeLabel');
+            if (currentTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeLabel.textContent = currentLang === 'en' ? 'Light' : 'লাইট';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeLabel.textContent = currentLang === 'en' ? 'Dark' : 'ডার্ক';
+            }
+        }
+
+        // ===== MOBILE MENU =====
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+        }
+
+        // ===== SCROLL REVEAL =====
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+            revealElements.forEach(el => observer.observe(el));
+        }
+
+        // ===== COUNTER =====
+        function initCounters() {
+            const counters = document.querySelectorAll('.stat-number[data-count]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const max = parseInt(target.getAttribute('data-count'));
+                        animateCounter(target, max);
+                        observer.unobserve(target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function animateCounter(element, max) {
+            let current = 0;
+            const increment = max / (2000 / 16);
+            function update() {
+                current += increment;
+                if (current >= max) {
+                    element.textContent = max + (max === 100 ? '%' : '+');
+                    return;
+                }
+                element.textContent = Math.floor(current) + (max === 100 ? '%' : '+');
+                requestAnimationFrame(update);
+            }
+            update();
+        }
+
+        // ===== CONTACT FORM =====
+        function handleContactForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = form.querySelector('.form-submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = currentLang === 'en' ? 'Sending...' : 'পাঠানো হচ্ছে...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.textContent = currentLang === 'en' ? '✓ Message Sent!' : '✓ বার্তা পাঠানো হয়েছে!';
+                submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }, 1500);
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage();
+            applyTheme();
+            initScrollReveal();
+            initCounters();
+        });
+    </script>
+</body>
+</html>
